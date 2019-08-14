@@ -1,24 +1,38 @@
 import csv
-import kivy
-kivy.require('1.11.1')
-
-from kivy.app import App
-from kivy.uix.widget import Widget
+from PyQt5.QtWidgets import *
 
 
-class label(Widget):
-    pass
+import sys
 
-class labelApp(App):
+class Dialog(QDialog):
+    NumGridRows = 3
+    NumButtons = 4
 
-    def build(self):
-        return label()
-
+    def __init__(self):
+        super(Dialog, self).__init__()
+        self.createFormGroupBox()
+        
+        buttonBox = QDialogButtonBox(QDialogButtonBox.Ok | QDialogButtonBox.Cancel)
+        buttonBox.accepted.connect(self.accept)
+        buttonBox.rejected.connect(self.reject)
+        
+        mainLayout = QVBoxLayout()
+        mainLayout.addWidget(self.formGroupBox)
+        mainLayout.addWidget(buttonBox)
+        self.setLayout(mainLayout)
+        
+        self.setWindowTitle("Label Vorlagen Ersteller")
+        
+    def createFormGroupBox(self):
+        self.formGroupBox = QGroupBox("Form layout")
+        layout = QFormLayout()
+        layout.addRow(QLabel("Anzahl Verteiler:"), QLineEdit())
+        layout.addRow(QLabel("Panele:"), QLineEdit())
+        layout.addRow(QLabel("Ports:"), QLineEdit('24'))
+        self.formGroupBox.setLayout(layout)
 
 if __name__ == '__main__':
-    labelApp().run()
-
-
-
-
+	app = QApplication(sys.argv)
+	dialog = Dialog()	
+	sys.exit(dialog.exec_())
 
