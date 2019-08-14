@@ -53,9 +53,7 @@ class Form(QDialog):
 		    layout.addWidget(self.ports)
 		    layout.addWidget(self.dosen)
 		    layout.addWidget(self.button)
-		    # Set dialog layout
 		    self.setLayout(layout)
-		    # Add button signal to greetings slot
 		    self.button.clicked.connect(self.schleifen)
 		    j = j + 1
 
