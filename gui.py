@@ -42,62 +42,69 @@ class Form(QMainWindow):
         self.SL.setCurrentIndex(0)
         
     def startLayout(self):
+        global ivt
         Widget = QWidget()
         layout = QVBoxLayout()
-        self.vt = QLineEdit("Anzahl der Vereiler hier eintragen")
+        vtLab = QLabel("Anzahl Verteiler:")
+        self.vt = QLineEdit("4")
         self.button1 = QPushButton("Bestätigen1")
+        layout.addWidget(vtLab)
         layout.addWidget(self.vt)
         layout.addWidget(self.button1)
         self.button1.clicked.connect(self.click1)
+        ivt = int(self.vt.text())
         Widget.setLayout(layout)
         return Widget
         
     def panele(self):
+        global ivt
+        global panList
+        panList = [0]
         i = 1
         Widget = QWidget()
         layout = QVBoxLayout()
-        self.pan = QLineEdit("Anzahl der Panele für VT%i hier eintragen" %i)
+        pan1lab = QLabel("Anzahl Panele für VT%i:" %i)
+        self.pan1 = QLineEdit("4")
         self.button2 = QPushButton("Bestätigen2")
-        layout.addWidget(self.pan)
+        layout.addWidget(pan1lab)
+        layout.addWidget(self.pan1)
+        panList[0] = int(self.pan1.text())
+        while i < ivt:
+            i=i+1
+            pan2lab = QLabel("Anzahl Panele für VT%i:" %i)
+            self.pan2 = QLineEdit("4")
+            layout.addWidget(pan2lab)
+            layout.addWidget(self.pan2)
+            panList.append(int(self.pan2.text()))
         layout.addWidget(self.button2)
         self.button2.clicked.connect(self.click2)
         Widget.setLayout(layout)
         return Widget
-#        while i <= int(self.vt.text()):
-#            self.pan = QLineEdit("Anzahl der Panele für VT%i hier eintragen" %i)
-#            self.button = QPushButton("Bestätigen")
-#            layout = QVBoxLayout()
-#            layout.addWidget(self.pan)
-#            layout.addWidget(self.button)
-#            self.setLayout(layout)
-#            self.button.clicked.connect(self.ports)
-#            i = i + 1
 
     def ports(self):
+        global ivt
+        global panList
         j = 0
+        i = 0
         Widget = QWidget()
         layout = QVBoxLayout()
-        self.ports = QLineEdit("24")
-        self.dosen = QLineEdit("J")
+        while i < ivt:
+            i=i+1
+            while j < panList[j]:
+                j =j +1
+                portlab = QLabel("Anzahl der Ports für VT%i Panel %i:" % (i, j))
+                self.ports = QLineEdit("24")
+                dosenlab = QLabel("Handelt es sich bei den Dosen um Doppeldosen (J/n):")
+                self.dosen = QLineEdit("J")
+                layout.addWidget(portlab)
+                layout.addWidget(self.ports)
+                layout.addWidget(dosenlab)
+                layout.addWidget(self.dosen)
         self.button3 = QPushButton("Bestätigen3")
-        layout.addWidget(self.ports)
-        layout.addWidget(self.dosen)
         layout.addWidget(self.button3)
         self.button3.clicked.connect(self.click3)
         Widget.setLayout(layout)
         return Widget
-#        while j < self.pan.text():
-#            k = 1
-#            self.ports = QLineEdit("24")
-#            self.dosen = QLineEdit("J")
-#            self.button = QPushButton("Bestätigen")
-#            layout = QVBoxLayout()
-#            layout.addWidget(self.ports)
-#            layout.addWidget(self.dosen)
-#            layout.addWidget(self.button)
-#            self.setLayout(layout)
-#            self.button.clicked.connect(self.schleifen)
-#            j = j + 1
 
     def schleifen(self):
         Widget = QWidget()
