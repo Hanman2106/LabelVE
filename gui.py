@@ -17,25 +17,26 @@ a = string.ascii_uppercase
 class Form(QMainWindow):
 
     def __init__(self, parent=None):
+        global x
         super().__init__(parent)
         # Create widgets
         self.SL = QStackedLayout()
         self.SL.addWidget(self.startLayout())
-        self.SL.addWidget(self.panele())
-        self.SL.addWidget(self.ports())
-        self.SL.addWidget(self.schleifen())
         self.SL.setCurrentIndex(0)
         self.MW = QWidget()
         self.MW.setLayout(self.SL)
         self.setCentralWidget(self.MW)
-    
+        
     def click1(self):
+        self.SL.addWidget(self.panele())
         self.SL.setCurrentIndex(1)
         
     def click2(self):
+        self.SL.addWidget(self.ports())
         self.SL.setCurrentIndex(2)
         
     def click3(self):
+        self.SL.addWidget(self.schleifen())
         self.SL.setCurrentIndex(3)
         
     def click4(self):
@@ -44,16 +45,18 @@ class Form(QMainWindow):
     def startLayout(self):
         global ivt
         Widget = QWidget()
-        layout = QVBoxLayout()
+        layout1 = QVBoxLayout()
+        layout2 = QHBoxLayout()
+        layout1.addLayout(layout2)
         vtLab = QLabel("Anzahl Verteiler:")
         self.vt = QLineEdit("4")
+        layout2.addWidget(vtLab)
+        layout2.addWidget(self.vt)
         self.button1 = QPushButton("Bestätigen1")
-        layout.addWidget(vtLab)
-        layout.addWidget(self.vt)
-        layout.addWidget(self.button1)
+        layout1.addWidget(self.button1)
         self.button1.clicked.connect(self.click1)
         ivt = int(self.vt.text())
-        Widget.setLayout(layout)
+        Widget.setLayout(layout1)
         return Widget
         
     def panele(self):
@@ -62,37 +65,48 @@ class Form(QMainWindow):
         panList = [0]
         i = 1
         Widget = QWidget()
-        layout = QVBoxLayout()
+        layout1 = QVBoxLayout()
+        layout2 = QHBoxLayout()
+        layout1.addLayout(layout2)
         pan1lab = QLabel("Anzahl Panele für VT%i:" %i)
         self.pan1 = QLineEdit("4")
         self.button2 = QPushButton("Bestätigen2")
-        layout.addWidget(pan1lab)
-        layout.addWidget(self.pan1)
+        layout2.addWidget(pan1lab)
+        layout2.addWidget(self.pan1)
         panList[0] = int(self.pan1.text())
         while i < ivt:
             i=i+1
+            layout = QHBoxLayout()
             pan2lab = QLabel("Anzahl Panele für VT%i:" %i)
             self.pan2 = QLineEdit("4")
             layout.addWidget(pan2lab)
             layout.addWidget(self.pan2)
+            layout1.addLayout(layout)
             panList.append(int(self.pan2.text()))
-        layout.addWidget(self.button2)
+        layout1.addWidget(self.button2)
         self.button2.clicked.connect(self.click2)
-        Widget.setLayout(layout)
+        Widget.setLayout(layout1)
         return Widget
 
     def ports(self):
         global ivt
         global panList
-        j = 0
+        j = 1
         i = 0
         Widget = QWidget()
         layout = QVBoxLayout()
         while i < ivt:
             i=i+1
-            while j < panList[j]:
-                j =j +1
-                portlab = QLabel("Anzahl der Ports für VT%i Panel %i:" % (i, j))
+            portlab = QLabel("Anzahl der Ports für VT%i Panel %i:" % (i, j))
+            self.ports = QLineEdit("24")
+            dosenlab = QLabel("Handelt es sich bei den Dosen um Doppeldosen (J/n):")
+            self.dosen = QLineEdit("J")
+            layout.addWidget(portlab)
+            layout.addWidget(self.ports)
+            layout.addWidget(dosenlab)
+            layout.addWidget(self.dosen)
+            while j < panList[j]-1:
+                portlab = QLabel("Anzahl der Ports für VT%i Panel %i:" % (i+1, j+1))
                 self.ports = QLineEdit("24")
                 dosenlab = QLabel("Handelt es sich bei den Dosen um Doppeldosen (J/n):")
                 self.dosen = QLineEdit("J")
@@ -100,6 +114,8 @@ class Form(QMainWindow):
                 layout.addWidget(self.ports)
                 layout.addWidget(dosenlab)
                 layout.addWidget(self.dosen)
+                j =j +1
+            j = 1
         self.button3 = QPushButton("Bestätigen3")
         layout.addWidget(self.button3)
         self.button3.clicked.connect(self.click3)
