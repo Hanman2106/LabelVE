@@ -199,178 +199,1418 @@ class Form(QDialog):
         self.pan10.textEdited.connect(self.edit_port10)
         self.buttonNext = QPushButton("Nächster Verteiler")
         self.buttonStart = QPushButton("Beenden")
+        self.dd1.stateChanged.connect(self.checkstatedd1)
+        self.dd2.stateChanged.connect(self.checkstatedd2)
+        self.dd3.stateChanged.connect(self.checkstatedd3)
+        self.dd4.stateChanged.connect(self.checkstatedd4)
+        self.dd5.stateChanged.connect(self.checkstatedd5)
+        self.dd6.stateChanged.connect(self.checkstatedd6)
+        self.dd7.stateChanged.connect(self.checkstatedd7)
+        self.dd8.stateChanged.connect(self.checkstatedd8)
+        self.dd9.stateChanged.connect(self.checkstatedd9)
+        self.dd10.stateChanged.connect(self.checkstatedd10)
+        self.ed1.stateChanged.connect(self.checkstateed1)
+        self.ed2.stateChanged.connect(self.checkstateed2)
+        self.ed3.stateChanged.connect(self.checkstateed3)
+        self.ed4.stateChanged.connect(self.checkstateed4)
+        self.ed5.stateChanged.connect(self.checkstateed5)
+        self.ed6.stateChanged.connect(self.checkstateed6)
+        self.ed7.stateChanged.connect(self.checkstateed7)
+        self.ed8.stateChanged.connect(self.checkstateed8)
+        self.ed9.stateChanged.connect(self.checkstateed9)
+        self.ed10.stateChanged.connect(self.checkstateed10)
+        self.gd1.stateChanged.connect(self.checkstategd1)
+        self.gd2.stateChanged.connect(self.checkstategd2)
+        self.gd3.stateChanged.connect(self.checkstategd3)
+        self.gd4.stateChanged.connect(self.checkstategd4)
+        self.gd5.stateChanged.connect(self.checkstategd5)
+        self.gd6.stateChanged.connect(self.checkstategd6)
+        self.gd7.stateChanged.connect(self.checkstategd7)
+        self.gd8.stateChanged.connect(self.checkstategd8)
+        self.gd9.stateChanged.connect(self.checkstategd9)
+        self.gd10.stateChanged.connect(self.checkstategd10)
         layout3.addWidget(self.buttonNext)
         layout3.addWidget(self.buttonStart)
         self.setLayout(layoutV)
-#        self.buttonStart.clicked.connect(self.anzpanele)
+        self.buttonNext.clicked.connect(self.nextVT)
+        self.buttonStart.clicked.connect(self.endVT)
 
     def edit_port1(self):
         self.port1.setText("24")
         self.dd1.setChecked(True)
+        self.ed1.setChecked(False)
+        self.gd1.setChecked(False)
 
     def edit_port2(self):
         self.port2.setText("24")
         self.dd2.setChecked(True)
+        self.ed2.setChecked(False)
+        self.gd2.setChecked(False)
 
     def edit_port3(self):
         self.port3.setText("24")
         self.dd3.setChecked(True)
+        self.ed3.setChecked(False)
+        self.gd3.setChecked(False)
 
     def edit_port4(self):
         self.port4.setText("24")
         self.dd4.setChecked(True)
+        self.ed4.setChecked(False)
+        self.gd4.setChecked(False)
 
     def edit_port5(self):
         self.port5.setText("24")
         self.dd5.setChecked(True)
+        self.ed5.setChecked(False)
+        self.gd5.setChecked(False)
 
     def edit_port6(self):
         self.port6.setText("24")
         self.dd6.setChecked(True)
+        self.ed6.setChecked(False)
+        self.gd6.setChecked(False)
 
     def edit_port7(self):
         self.port7.setText("24")
         self.dd7.setChecked(True)
+        self.ed7.setChecked(False)
+        self.gd7.setChecked(False)
 
     def edit_port8(self):
         self.port8.setText("24")
         self.dd8.setChecked(True)
+        self.ed8.setChecked(False)
+        self.gd8.setChecked(False)
 
     def edit_port9(self):
         self.port9.setText("24")
         self.dd9.setChecked(True)
+        self.ed9.setChecked(False)
+        self.gd9.setChecked(False)
 
     def edit_port10(self):
         self.port10.setText("24")
         self.dd10.setChecked(True)
+        self.ed10.setChecked(False)
+        self.gd10.setChecked(False)
 
-#class Form(QMainWindow):
+    def checkstatedd1(self):
+        if self.dd1.isChecked() == True:
+            self.ed1.setChecked(False)
+            self.gd1.setChecked(False)
 
-#    def __init__(self, parent=None):
-#        global x
-#        super().__init__(parent)
-#        # Create widgets
-#        self.SL = QStackedLayout()
-#        self.SL.addWidget(self.startLayout())
-#        self.SL.addWidget(self.panele())
-#        self.SL.addWidget(self.ports())
-#        self.SL.addWidget(self.schleifen())
-#        self.SL.setCurrentIndex(0)
-#        self.MW = QWidget()
-#        self.MW.setLayout(self.SL)
-#        self.setCentralWidget(self.MW)
-#    
-#    def click1(self):
-#        self.SL.removeWidget(self.panele())
-#        self.panele().destroy()
-#        self.SL.setCurrentIndex(1)
-#        
-#    def click2(self):
-#        self.SL.setCurrentIndex(2)
-#        
-#    def click3(self):
-#        self.SL.setCurrentIndex(3)
-#        
-#    def click4(self):
-#        self.SL.setCurrentIndex(0)
-#        
-#    def startLayout(self):
-#        global ivt
-#        Widget = QWidget()
-#        layout1 = QVBoxLayout()
-#        layout2 = QHBoxLayout()
-#        layout1.addLayout(layout2)
-#        vtLab = QLabel("Anzahl Verteiler:")
-#        self.vt = QLineEdit("4")
-#        layout2.addWidget(vtLab)
-#        layout2.addWidget(self.vt)
-#        self.button1 = QPushButton("Bestätigen1")
-#        layout1.addWidget(self.button1)
-#        self.button1.clicked.connect(self.click1)
-#        ivt = int(self.vt.text())
-#        Widget.setLayout(layout1)
-#        return Widget
-#        
-#    def panele(self):
-#        global ivt
-#        global panList
-#        panList = [0]
-#        i = 1
-#        Widget = QWidget()
-#        layout1 = QVBoxLayout()
-#        layout2 = QHBoxLayout()
-#        layout1.addLayout(layout2)
-#        pan1lab = QLabel("Anzahl Panele für VT%i:" %i)
-#        self.pan1 = QLineEdit("4")
-#        self.button2 = QPushButton("Bestätigen2")
-#        layout2.addWidget(pan1lab)
-#        layout2.addWidget(self.pan1)
-#        panList[0] = int(self.pan1.text())
-#        while i < ivt:
-#            i=i+1
-#            layout = QHBoxLayout()
-#            pan2lab = QLabel("Anzahl Panele für VT%i:" %i)
-#            self.pan2 = QLineEdit("4")
-#            layout.addWidget(pan2lab)
-#            layout.addWidget(self.pan2)
-#            layout1.addLayout(layout)
-#            panList.append(int(self.pan2.text()))
-#        layout1.addWidget(self.button2)
-#        self.button2.clicked.connect(self.click2)
-#        Widget.setLayout(layout1)
-#        return Widget
+    def checkstateed1(self):
+        if self.ed1.isChecked() == True:
+            self.dd1.setChecked(False)
+            self.gd1.setChecked(False)
 
-#    def ports(self):
-#        global ivt
-#        global panList
-#        j = 1
-#        i = 0
-#        Widget = QWidget()
-#        layout = QVBoxLayout()
-#        while i < ivt:
-#            i=i+1
-#            portlab = QLabel("Anzahl der Ports für VT%i Panel %i:" % (i, j))
-#            self.ports = QLineEdit("24")
-#            dosenlab = QLabel("Handelt es sich bei den Dosen um Doppeldosen (J/n):")
-#            self.dosen = QLineEdit("J")
-#            layout.addWidget(portlab)
-#            layout.addWidget(self.ports)
-#            layout.addWidget(dosenlab)
-#            layout.addWidget(self.dosen)
-#            while j < panList[j]-1:
-#                portlab = QLabel("Anzahl der Ports für VT%i Panel %i:" % (i+1, j+1))
-#                self.ports = QLineEdit("24")
-#                dosenlab = QLabel("Handelt es sich bei den Dosen um Doppeldosen (J/n):")
-#                self.dosen = QLineEdit("J")
-#                layout.addWidget(portlab)
-#                layout.addWidget(self.ports)
-#                layout.addWidget(dosenlab)
-#                layout.addWidget(self.dosen)
-#                j =j +1
-#            j = 1
-#        self.button3 = QPushButton("Bestätigen3")
-#        layout.addWidget(self.button3)
-#        self.button3.clicked.connect(self.click3)
-#        Widget.setLayout(layout)
-#        return Widget
+    def checkstategd1(self):
+        if self.gd1.isChecked() == True:
+            self.dd1.setChecked(False)
+            self.ed1.setChecked(False)
 
-#    def schleifen(self):
-#        Widget = QWidget()
-#        layout = QVBoxLayout()
-#        self.button = QPushButton("Bestätigen4")
-#        layout.addWidget(self.button)
-#        self.button.clicked.connect(self.click4)
-#        Widget.setLayout(layout)
-#        return Widget
-##        while k <= self.ports.text():
-##            if self.dosen.text() == 'J':
-##                string = '%s%i VT%i %s%i'% (a[j], k, i, a[j], k+1)
-##                k = k + 2
-##            elif self.dosen.text() == 'n':
-##                string = 'VT%i %s%i'% (i, a[j], k)
-##                k = k + 1
-##            print(string)
-##            writer.writerow({'A' : string})
+    def checkstatedd2(self):
+        if self.dd2.isChecked() == True:
+            self.ed2.setChecked(False)
+            self.gd2.setChecked(False)
+
+    def checkstateed2(self):
+        if self.ed2.isChecked() == True:
+            self.dd2.setChecked(False)
+            self.gd2.setChecked(False)
+
+    def checkstategd2(self):
+        if self.gd2.isChecked() == True:
+            self.dd2.setChecked(False)
+            self.ed2.setChecked(False)
+
+    def checkstatedd3(self):
+        if self.dd3.isChecked() == True:
+            self.ed3.setChecked(False)
+            self.gd3.setChecked(False)
+
+    def checkstateed3(self):
+        if self.ed3.isChecked() == True:
+            self.dd3.setChecked(False)
+            self.gd3.setChecked(False)
+
+    def checkstategd3(self):
+        if self.gd3.isChecked() == True:
+            self.dd3.setChecked(False)
+            self.ed3.setChecked(False)
+
+    def checkstatedd4(self):
+        if self.dd4.isChecked() == True:
+            self.ed4.setChecked(False)
+            self.gd4.setChecked(False)
+
+    def checkstateed4(self):
+        if self.ed4.isChecked() == True:
+            self.dd4.setChecked(False)
+            self.gd4.setChecked(False)
+
+    def checkstategd4(self):
+        if self.gd4.isChecked() == True:
+            self.dd4.setChecked(False)
+            self.ed4.setChecked(False)
+
+    def checkstatedd5(self):
+        if self.dd5.isChecked() == True:
+            self.ed5.setChecked(False)
+            self.gd5.setChecked(False)
+
+    def checkstateed5(self):
+        if self.ed5.isChecked() == True:
+            self.dd5.setChecked(False)
+            self.gd5.setChecked(False)
+
+    def checkstategd5(self):
+        if self.gd5.isChecked() == True:
+            self.dd5.setChecked(False)
+            self.ed5.setChecked(False)
+
+    def checkstatedd6(self):
+        if self.dd6.isChecked() == True:
+            self.ed6.setChecked(False)
+            self.gd6.setChecked(False)
+
+    def checkstateed6(self):
+        if self.ed6.isChecked() == True:
+            self.dd6.setChecked(False)
+            self.gd6.setChecked(False)
+
+    def checkstategd6(self):
+        if self.gd6.isChecked() == True:
+            self.dd6.setChecked(False)
+            self.ed6.setChecked(False)
+
+    def checkstatedd7(self):
+        if self.dd7.isChecked() == True:
+            self.ed7.setChecked(False)
+            self.gd7.setChecked(False)
+
+    def checkstateed7(self):
+        if self.ed7.isChecked() == True:
+            self.dd7.setChecked(False)
+            self.gd7.setChecked(False)
+
+    def checkstategd7(self):
+        if self.gd7.isChecked() == True:
+            self.dd7.setChecked(False)
+            self.ed7.setChecked(False)
+
+    def checkstatedd8(self):
+        if self.dd8.isChecked() == True:
+            self.ed8.setChecked(False)
+            self.gd8.setChecked(False)
+
+    def checkstateed8(self):
+        if self.ed8.isChecked() == True:
+            self.dd8.setChecked(False)
+            self.gd8.setChecked(False)
+
+    def checkstategd8(self):
+        if self.gd8.isChecked() == True:
+            self.dd8.setChecked(False)
+            self.ed8.setChecked(False)
+
+    def checkstatedd9(self):
+        if self.dd9.isChecked() == True:
+            self.ed9.setChecked(False)
+            self.gd9.setChecked(False)
+
+    def checkstateed9(self):
+        if self.ed9.isChecked() == True:
+            self.dd9.setChecked(False)
+            self.gd9.setChecked(False)
+
+    def checkstategd9(self):
+        if self.gd9.isChecked() == True:
+            self.dd9.setChecked(False)
+            self.ed9.setChecked(False)
+
+    def checkstatedd10(self):
+        if self.dd10.isChecked() == True:
+            self.ed10.setChecked(False)
+            self.gd10.setChecked(False)
+
+    def checkstateed10(self):
+        if self.ed10.isChecked() == True:
+            self.dd10.setChecked(False)
+            self.gd10.setChecked(False)
+
+    def checkstategd10(self):
+        if self.gd10.isChecked() == True:
+            self.dd10.setChecked(False)
+            self.ed10.setChecked(False)
+
+    def nextVT(self):
+        if self.pan1.text() != "":
+            k = 1
+            if self.dd1.isChecked() == True:
+                while k <= int(self.port1.text()):
+                    string = '%s%i %s %s%i'% (self.pan1.text(), k, self.vt.text(), self.pan1.text(), k+1)
+                    k = k + 2
+                    print (string)
+                    writer.writerow({'A' : string})
+            elif self.ed1.isChecked() == True:
+                while k <= int(self.port1.text()):
+                    string = '%s %s%i'% (self.vt.text(), self.pan1.text(), k)
+                    k = k + 1
+                    print (string)
+                    writer.writerow({'A' : string})
+            elif self.gd1.isChecked() == True:
+                str = self.ein1.text()
+                l = [int(s) for s in str.split(",")]
+                while k < l[0]:
+                    string = '%s%i %s %s%i'% (self.pan1.text(), k, self.vt.text(), self.pan1.text(), k+1)
+                    k = k + 2
+                    print (string)
+                    writer.writerow({'A' : string})
+                string = '%s %s%i'% (self.vt.text(), self.pan1.text(), k)
+                k = k + 1
+                print (string)
+                writer.writerow({'A' : string})
+                i = 0
+                z = len(l)
+                while i < z-1:
+                    while k < l[i+1]:
+                        string = '%s%i %s %s%i'% (self.pan1.text(), k, self.vt.text(), self.pan1.text(), k+1)
+                        k = k + 2
+                        print (string)
+                        writer.writerow({'A' : string})
+                    string = '%s %s%i'% (self.vt.text(), self.pan1.text(), k)
+                    k = k + 1
+                    print (string)
+                    writer.writerow({'A' : string})
+                    i = i + 1
+                if l[i] < int(self.port1.text()) and (int(self.port1.text())-l[i]) % 2 == 0:
+                    while k <= int(self.port1.text()):
+                        string = '%s%i %s %s%i'% (self.pan1.text(), k, self.vt.text(), self.pan1.text(), k+1)
+                        k = k + 2
+                        print (string)
+                        writer.writerow({'A' : string})
+                elif l[i] < int(self.port1.text()) and (int(self.port1.text())-l[i]) % 2 != 0:
+                    while k <= int(self.port1.text())-1:
+                        string = '%s%i %s %s%i'% (self.pan1.text(), k, self.vt.text(), self.pan1.text(), k+1)
+                        k = k + 2
+                        print (string)
+                        writer.writerow({'A' : string})
+                    string = '%s %s%i'% (self.vt.text(), self.pan1.text(), k)
+                    k = k + 1
+                    print (string)
+                    writer.writerow({'A' : string})
+        if self.pan2.text() != "":
+            k = 1
+            if self.dd2.isChecked() == True:
+                while k <= int(self.port2.text()):
+                    string = '%s%i %s %s%i'% (self.pan2.text(), k, self.vt.text(), self.pan2.text(), k+1)
+                    k = k + 2
+                    print (string)
+                    writer.writerow({'A' : string})
+            elif self.ed2.isChecked() == True:
+                while k <= int(self.port2.text()):
+                    string = '%s %s%i'% (self.vt.text(), self.pan2.text(), k)
+                    k = k + 1
+                    print (string)
+                    writer.writerow({'A' : string})
+            elif self.gd2.isChecked() == True:
+                str = self.ein2.text()
+                l = [int(s) for s in str.split(",")]
+                while k < l[0]:
+                    string = '%s%i %s %s%i'% (self.pan2.text(), k, self.vt.text(), self.pan2.text(), k+1)
+                    k = k + 2
+                    print (string)
+                    writer.writerow({'A' : string})
+                string = '%s %s%i'% (self.vt.text(), self.pan2.text(), k)
+                k = k + 1
+                print (string)
+                writer.writerow({'A' : string})
+                i = 0
+                z = len(l)
+                while i < z-1:
+                    while k < l[i+1]:
+                        string = '%s%i %s %s%i'% (self.pan2.text(), k, self.vt.text(), self.pan2.text(), k+1)
+                        k = k + 2
+                        print (string)
+                        writer.writerow({'A' : string})
+                    string = '%s %s%i'% (self.vt.text(), self.pan2.text(), k)
+                    k = k + 1
+                    print (string)
+                    writer.writerow({'A' : string})
+                    i = i + 1
+                if l[i] < int(self.port2.text()) and (int(self.port2.text())-l[i]) % 2 == 0:
+                    while k <= int(self.port2.text()):
+                        string = '%s%i %s %s%i'% (self.pan2.text(), k, self.vt.text(), self.pan2.text(), k+1)
+                        k = k + 2
+                        print (string)
+                        writer.writerow({'A' : string})
+                elif l[i] < int(self.port2.text()) and (int(self.port2.text())-l[i]) % 2 != 0:
+                    while k <= int(self.port2.text())-1:
+                        string = '%s%i %s %s%i'% (self.pan2.text(), k, self.vt.text(), self.pan2.text(), k+1)
+                        k = k + 2
+                        print (string)
+                        writer.writerow({'A' : string})
+                    string = '%s %s%i'% (self.vt.text(), self.pan2.text(), k)
+                    k = k + 1
+                    print (string)
+                    writer.writerow({'A' : string})
+        if self.pan3.text() != "":
+            k = 1
+            if self.dd3.isChecked() == True:
+                while k <= int(self.port3.text()):
+                    string = '%s%i %s %s%i'% (self.pan3.text(), k, self.vt.text(), self.pan3.text(), k+1)
+                    k = k + 2
+                    print (string)
+                    writer.writerow({'A' : string})
+            elif self.ed3.isChecked() == True:
+                while k <= int(self.port3.text()):
+                    string = '%s %s%i'% (self.vt.text(), self.pan3.text(), k)
+                    k = k + 1
+                    print (string)
+                    writer.writerow({'A' : string})
+            elif self.gd3.isChecked() == True:
+                str = self.ein3.text()
+                l = [int(s) for s in str.split(",")]
+                while k < l[0]:
+                    string = '%s%i %s %s%i'% (self.pan3.text(), k, self.vt.text(), self.pan3.text(), k+1)
+                    k = k + 2
+                    print (string)
+                    writer.writerow({'A' : string})
+                string = '%s %s%i'% (self.vt.text(), self.pan3.text(), k)
+                k = k + 1
+                print (string)
+                writer.writerow({'A' : string})
+                i = 0
+                z = len(l)
+                while i < z-1:
+                    while k < l[i+1]:
+                        string = '%s%i %s %s%i'% (self.pan3.text(), k, self.vt.text(), self.pan3.text(), k+1)
+                        k = k + 2
+                        print (string)
+                        writer.writerow({'A' : string})
+                    string = '%s %s%i'% (self.vt.text(), self.pan3.text(), k)
+                    k = k + 1
+                    print (string)
+                    writer.writerow({'A' : string})
+                    i = i + 1
+                if l[i] < int(self.port3.text()) and (int(self.port3.text())-l[i]) % 2 == 0:
+                    while k <= int(self.port3.text()):
+                        string = '%s%i %s %s%i'% (self.pan3.text(), k, self.vt.text(), self.pan3.text(), k+1)
+                        k = k + 2
+                        print (string)
+                        writer.writerow({'A' : string})
+                elif l[i] < int(self.port3.text()) and (int(self.port3.text())-l[i]) % 2 != 0:
+                    while k <= int(self.port3.text())-1:
+                        string = '%s%i %s %s%i'% (self.pan3.text(), k, self.vt.text(), self.pan3.text(), k+1)
+                        k = k + 2
+                        print (string)
+                        writer.writerow({'A' : string})
+                    string = '%s %s%i'% (self.vt.text(), self.pan3.text(), k)
+                    k = k + 1
+                    print (string)
+                    writer.writerow({'A' : string})
+        if self.pan4.text() != "":
+            k = 1
+            if self.dd4.isChecked() == True:
+                while k <= int(self.port4.text()):
+                    string = '%s%i %s %s%i'% (self.pan4.text(), k, self.vt.text(), self.pan4.text(), k+1)
+                    k = k + 2
+                    print (string)
+                    writer.writerow({'A' : string})
+            elif self.ed4.isChecked() == True:
+                while k <= int(self.port4.text()):
+                    string = '%s %s%i'% (self.vt.text(), self.pan4.text(), k)
+                    k = k + 1
+                    print (string)
+                    writer.writerow({'A' : string})
+            elif self.gd4.isChecked() == True:
+                str = self.ein4.text()
+                l = [int(s) for s in str.split(",")]
+                while k < l[0]:
+                    string = '%s%i %s %s%i'% (self.pan4.text(), k, self.vt.text(), self.pan4.text(), k+1)
+                    k = k + 2
+                    print (string)
+                    writer.writerow({'A' : string})
+                string = '%s %s%i'% (self.vt.text(), self.pan4.text(), k)
+                k = k + 1
+                print (string)
+                writer.writerow({'A' : string})
+                i = 0
+                z = len(l)
+                while i < z-1:
+                    while k < l[i+1]:
+                        string = '%s%i %s %s%i'% (self.pan4.text(), k, self.vt.text(), self.pan4.text(), k+1)
+                        k = k + 2
+                        print (string)
+                        writer.writerow({'A' : string})
+                    string = '%s %s%i'% (self.vt.text(), self.pan4.text(), k)
+                    k = k + 1
+                    print (string)
+                    writer.writerow({'A' : string})
+                    i = i + 1
+                if l[i] < int(self.port4.text()) and (int(self.port4.text())-l[i]) % 2 == 0:
+                    while k <= int(self.port4.text()):
+                        string = '%s%i %s %s%i'% (self.pan4.text(), k, self.vt.text(), self.pan4.text(), k+1)
+                        k = k + 2
+                        print (string)
+                        writer.writerow({'A' : string})
+                elif l[i] < int(self.port4.text()) and (int(self.port4.text())-l[i]) % 2 != 0:
+                    while k <= int(self.port4.text())-1:
+                        string = '%s%i %s %s%i'% (self.pan4.text(), k, self.vt.text(), self.pan4.text(), k+1)
+                        k = k + 2
+                        print (string)
+                        writer.writerow({'A' : string})
+                    string = '%s %s%i'% (self.vt.text(), self.pan4.text(), k)
+                    k = k + 1
+                    print (string)
+                    writer.writerow({'A' : string})
+        if self.pan5.text() != "":
+            k = 1
+            if self.dd5.isChecked() == True:
+                while k <= int(self.port5.text()):
+                    string = '%s%i %s %s%i'% (self.pan5.text(), k, self.vt.text(), self.pan5.text(), k+1)
+                    k = k + 2
+                    print (string)
+                    writer.writerow({'A' : string})
+            elif self.ed5.isChecked() == True:
+                while k <= int(self.port5.text()):
+                    string = '%s %s%i'% (self.vt.text(), self.pan5.text(), k)
+                    k = k + 1
+                    print (string)
+                    writer.writerow({'A' : string})
+            elif self.gd5.isChecked() == True:
+                str = self.ein5.text()
+                l = [int(s) for s in str.split(",")]
+                while k < l[0]:
+                    string = '%s%i %s %s%i'% (self.pan5.text(), k, self.vt.text(), self.pan5.text(), k+1)
+                    k = k + 2
+                    print (string)
+                    writer.writerow({'A' : string})
+                string = '%s %s%i'% (self.vt.text(), self.pan5.text(), k)
+                k = k + 1
+                print (string)
+                writer.writerow({'A' : string})
+                i = 0
+                z = len(l)
+                while i < z-1:
+                    while k < l[i+1]:
+                        string = '%s%i %s %s%i'% (self.pan5.text(), k, self.vt.text(), self.pan5.text(), k+1)
+                        k = k + 2
+                        print (string)
+                        writer.writerow({'A' : string})
+                    string = '%s %s%i'% (self.vt.text(), self.pan5.text(), k)
+                    k = k + 1
+                    print (string)
+                    writer.writerow({'A' : string})
+                    i = i + 1
+                if l[i] < int(self.port5.text()) and (int(self.port5.text())-l[i]) % 2 == 0:
+                    while k <= int(self.port5.text()):
+                        string = '%s%i %s %s%i'% (self.pan5.text(), k, self.vt.text(), self.pan5.text(), k+1)
+                        k = k + 2
+                        print (string)
+                        writer.writerow({'A' : string})
+                elif l[i] < int(self.port5.text()) and (int(self.port5.text())-l[i]) % 2 != 0:
+                    while k <= int(self.port5.text())-1:
+                        string = '%s%i %s %s%i'% (self.pan5.text(), k, self.vt.text(), self.pan5.text(), k+1)
+                        k = k + 2
+                        print (string)
+                        writer.writerow({'A' : string})
+                    string = '%s %s%i'% (self.vt.text(), self.pan5.text(), k)
+                    k = k + 1
+                    print (string)
+                    writer.writerow({'A' : string})
+        if self.pan6.text() != "":
+            k = 1
+            if self.dd6.isChecked() == True:
+                while k <= int(self.port6.text()):
+                    string = '%s%i %s %s%i'% (self.pan6.text(), k, self.vt.text(), self.pan6.text(), k+1)
+                    k = k + 2
+                    print (string)
+                    writer.writerow({'A' : string})
+            elif self.ed6.isChecked() == True:
+                while k <= int(self.port6.text()):
+                    string = '%s %s%i'% (self.vt.text(), self.pan6.text(), k)
+                    k = k + 1
+                    print (string)
+                    writer.writerow({'A' : string})
+            elif self.gd6.isChecked() == True:
+                str = self.ein6.text()
+                l = [int(s) for s in str.split(",")]
+                while k < l[0]:
+                    string = '%s%i %s %s%i'% (self.pan6.text(), k, self.vt.text(), self.pan6.text(), k+1)
+                    k = k + 2
+                    print (string)
+                    writer.writerow({'A' : string})
+                string = '%s %s%i'% (self.vt.text(), self.pan6.text(), k)
+                k = k + 1
+                print (string)
+                writer.writerow({'A' : string})
+                i = 0
+                z = len(l)
+                while i < z-1:
+                    while k < l[i+1]:
+                        string = '%s%i %s %s%i'% (self.pan6.text(), k, self.vt.text(), self.pan6.text(), k+1)
+                        k = k + 2
+                        print (string)
+                        writer.writerow({'A' : string})
+                    string = '%s %s%i'% (self.vt.text(), self.pan6.text(), k)
+                    k = k + 1
+                    print (string)
+                    writer.writerow({'A' : string})
+                    i = i + 1
+                if l[i] < int(self.port6.text()) and (int(self.port6.text())-l[i]) % 2 == 0:
+                    while k <= int(self.port6.text()):
+                        string = '%s%i %s %s%i'% (self.pan6.text(), k, self.vt.text(), self.pan6.text(), k+1)
+                        k = k + 2
+                        print (string)
+                        writer.writerow({'A' : string})
+                elif l[i] < int(self.port6.text()) and (int(self.port6.text())-l[i]) % 2 != 0:
+                    while k <= int(self.port6.text())-1:
+                        string = '%s%i %s %s%i'% (self.pan6.text(), k, self.vt.text(), self.pan6.text(), k+1)
+                        k = k + 2
+                        print (string)
+                        writer.writerow({'A' : string})
+                    string = '%s %s%i'% (self.vt.text(), self.pan6.text(), k)
+                    k = k + 1
+                    print (string)
+                    writer.writerow({'A' : string})
+        if self.pan7.text() != "":
+            k = 1
+            if self.dd7.isChecked() == True:
+                while k <= int(self.port7.text()):
+                    string = '%s%i %s %s%i'% (self.pan7.text(), k, self.vt.text(), self.pan7.text(), k+1)
+                    k = k + 2
+                    print (string)
+                    writer.writerow({'A' : string})
+            elif self.ed7.isChecked() == True:
+                while k <= int(self.port7.text()):
+                    string = '%s %s%i'% (self.vt.text(), self.pan7.text(), k)
+                    k = k + 1
+                    print (string)
+                    writer.writerow({'A' : string})
+            elif self.gd7.isChecked() == True:
+                str = self.ein7.text()
+                l = [int(s) for s in str.split(",")]
+                while k < l[0]:
+                    string = '%s%i %s %s%i'% (self.pan7.text(), k, self.vt.text(), self.pan7.text(), k+1)
+                    k = k + 2
+                    print (string)
+                    writer.writerow({'A' : string})
+                string = '%s %s%i'% (self.vt.text(), self.pan7.text(), k)
+                k = k + 1
+                print (string)
+                writer.writerow({'A' : string})
+                i = 0
+                z = len(l)
+                while i < z-1:
+                    while k < l[i+1]:
+                        string = '%s%i %s %s%i'% (self.pan7.text(), k, self.vt.text(), self.pan7.text(), k+1)
+                        k = k + 2
+                        print (string)
+                        writer.writerow({'A' : string})
+                    string = '%s %s%i'% (self.vt.text(), self.pan7.text(), k)
+                    k = k + 1
+                    print (string)
+                    writer.writerow({'A' : string})
+                    i = i + 1
+                if l[i] < int(self.port7.text()) and (int(self.port7.text())-l[i]) % 2 == 0:
+                    while k <= int(self.port7.text()):
+                        string = '%s%i %s %s%i'% (self.pan7.text(), k, self.vt.text(), self.pan7.text(), k+1)
+                        k = k + 2
+                        print (string)
+                        writer.writerow({'A' : string})
+                elif l[i] < int(self.port7.text()) and (int(self.port7.text())-l[i]) % 2 != 0:
+                    while k <= int(self.port7.text())-1:
+                        string = '%s%i %s %s%i'% (self.pan7.text(), k, self.vt.text(), self.pan7.text(), k+1)
+                        k = k + 2
+                        print (string)
+                        writer.writerow({'A' : string})
+                    string = '%s %s%i'% (self.vt.text(), self.pan7.text(), k)
+                    k = k + 1
+                    print (string)
+                    writer.writerow({'A' : string})
+        if self.pan8.text() != "":
+            k = 1
+            if self.dd8.isChecked() == True:
+                while k <= int(self.port8.text()):
+                    string = '%s%i %s %s%i'% (self.pan8.text(), k, self.vt.text(), self.pan8.text(), k+1)
+                    k = k + 2
+                    print (string)
+                    writer.writerow({'A' : string})
+            elif self.ed8.isChecked() == True:
+                while k <= int(self.port8.text()):
+                    string = '%s %s%i'% (self.vt.text(), self.pan8.text(), k)
+                    k = k + 1
+                    print (string)
+                    writer.writerow({'A' : string})
+            elif self.gd8.isChecked() == True:
+                str = self.ein8.text()
+                l = [int(s) for s in str.split(",")]
+                while k < l[0]:
+                    string = '%s%i %s %s%i'% (self.pan8.text(), k, self.vt.text(), self.pan8.text(), k+1)
+                    k = k + 2
+                    print (string)
+                    writer.writerow({'A' : string})
+                string = '%s %s%i'% (self.vt.text(), self.pan8.text(), k)
+                k = k + 1
+                print (string)
+                writer.writerow({'A' : string})
+                i = 0
+                z = len(l)
+                while i < z-1:
+                    while k < l[i+1]:
+                        string = '%s%i %s %s%i'% (self.pan8.text(), k, self.vt.text(), self.pan8.text(), k+1)
+                        k = k + 2
+                        print (string)
+                        writer.writerow({'A' : string})
+                    string = '%s %s%i'% (self.vt.text(), self.pan8.text(), k)
+                    k = k + 1
+                    print (string)
+                    writer.writerow({'A' : string})
+                    i = i + 1
+                if l[i] < int(self.port8.text()) and (int(self.port8.text())-l[i]) % 2 == 0:
+                    while k <= int(self.port8.text()):
+                        string = '%s%i %s %s%i'% (self.pan8.text(), k, self.vt.text(), self.pan8.text(), k+1)
+                        k = k + 2
+                        print (string)
+                        writer.writerow({'A' : string})
+                elif l[i] < int(self.port8.text()) and (int(self.port8.text())-l[i]) % 2 != 0:
+                    while k <= int(self.port8.text())-1:
+                        string = '%s%i %s %s%i'% (self.pan8.text(), k, self.vt.text(), self.pan8.text(), k+1)
+                        k = k + 2
+                        print (string)
+                        writer.writerow({'A' : string})
+                    string = '%s %s%i'% (self.vt.text(), self.pan8.text(), k)
+                    k = k + 1
+                    print (string)
+                    writer.writerow({'A' : string})
+        if self.pan9.text() != "":
+            k = 1
+            if self.dd9.isChecked() == True:
+                while k <= int(self.port9.text()):
+                    string = '%s%i %s %s%i'% (self.pan9.text(), k, self.vt.text(), self.pan9.text(), k+1)
+                    k = k + 2
+                    print (string)
+                    writer.writerow({'A' : string})
+            elif self.ed9.isChecked() == True:
+                while k <= int(self.port9.text()):
+                    string = '%s %s%i'% (self.vt.text(), self.pan9.text(), k)
+                    k = k + 1
+                    print (string)
+                    writer.writerow({'A' : string})
+            elif self.gd9.isChecked() == True:
+                str = self.ein9.text()
+                l = [int(s) for s in str.split(",")]
+                while k < l[0]:
+                    string = '%s%i %s %s%i'% (self.pan9.text(), k, self.vt.text(), self.pan9.text(), k+1)
+                    k = k + 2
+                    print (string)
+                    writer.writerow({'A' : string})
+                string = '%s %s%i'% (self.vt.text(), self.pan9.text(), k)
+                k = k + 1
+                print (string)
+                writer.writerow({'A' : string})
+                i = 0
+                z = len(l)
+                while i < z-1:
+                    while k < l[i+1]:
+                        string = '%s%i %s %s%i'% (self.pan9.text(), k, self.vt.text(), self.pan9.text(), k+1)
+                        k = k + 2
+                        print (string)
+                        writer.writerow({'A' : string})
+                    string = '%s %s%i'% (self.vt.text(), self.pan9.text(), k)
+                    k = k + 1
+                    print (string)
+                    writer.writerow({'A' : string})
+                    i = i + 1
+                if l[i] < int(self.port9.text()) and (int(self.port9.text())-l[i]) % 2 == 0:
+                    while k <= int(self.port9.text()):
+                        string = '%s%i %s %s%i'% (self.pan9.text(), k, self.vt.text(), self.pan9.text(), k+1)
+                        k = k + 2
+                        print (string)
+                        writer.writerow({'A' : string})
+                elif l[i] < int(self.port9.text()) and (int(self.port9.text())-l[i]) % 2 != 0:
+                    while k <= int(self.port9.text())-1:
+                        string = '%s%i %s %s%i'% (self.pan9.text(), k, self.vt.text(), self.pan9.text(), k+1)
+                        k = k + 2
+                        print (string)
+                        writer.writerow({'A' : string})
+                    string = '%s %s%i'% (self.vt.text(), self.pan9.text(), k)
+                    k = k + 1
+                    print (string)
+                    writer.writerow({'A' : string})
+        if self.pan10.text() != "":
+            k = 1
+            if self.dd10.isChecked() == True:
+                while k <= int(self.port10.text()):
+                    string = '%s%i %s %s%i'% (self.pan10.text(), k, self.vt.text(), self.pan10.text(), k+1)
+                    k = k + 2
+                    print (string)
+                    writer.writerow({'A' : string})
+            elif self.ed10.isChecked() == True:
+                while k <= int(self.port10.text()):
+                    string = '%s %s%i'% (self.vt.text(), self.pan10.text(), k)
+                    k = k + 1
+                    print (string)
+                    writer.writerow({'A' : string})
+            elif self.gd10.isChecked() == True:
+                str = self.ein10.text()
+                l = [int(s) for s in str.split(",")]
+                while k < l[0]:
+                    string = '%s%i %s %s%i'% (self.pan10.text(), k, self.vt.text(), self.pan10.text(), k+1)
+                    k = k + 2
+                    print (string)
+                    writer.writerow({'A' : string})
+                string = '%s %s%i'% (self.vt.text(), self.pan10.text(), k)
+                k = k + 1
+                print (string)
+                writer.writerow({'A' : string})
+                i = 0
+                z = len(l)
+                while i < z-1:
+                    while k < l[i+1]:
+                        string = '%s%i %s %s%i'% (self.pan10.text(), k, self.vt.text(), self.pan10.text(), k+1)
+                        k = k + 2
+                        print (string)
+                        writer.writerow({'A' : string})
+                    string = '%s %s%i'% (self.vt.text(), self.pan10.text(), k)
+                    k = k + 1
+                    print (string)
+                    writer.writerow({'A' : string})
+                    i = i + 1
+                if l[i] < int(self.port10.text()) and (int(self.port10.text())-l[i]) % 2 == 0:
+                    while k <= int(self.port10.text()):
+                        string = '%s%i %s %s%i'% (self.pan10.text(), k, self.vt.text(), self.pan10.text(), k+1)
+                        k = k + 2
+                        print (string)
+                        writer.writerow({'A' : string})
+                elif l[i] < int(self.port10.text()) and (int(self.port10.text())-l[i]) % 2 != 0:
+                    while k <= int(self.port10.text())-1:
+                        string = '%s%i %s %s%i'% (self.pan10.text(), k, self.vt.text(), self.pan10.text(), k+1)
+                        k = k + 2
+                        print (string)
+                        writer.writerow({'A' : string})
+                    string = '%s %s%i'% (self.vt.text(), self.pan10.text(), k)
+                    k = k + 1
+                    print (string)
+                    writer.writerow({'A' : string})
+        self.vt.clear()
+        self.pan1.clear()
+        self.port1.clear()
+        self.ein1.clear()
+        self.dd1.setChecked(False)
+        self.ed1.setChecked(False)
+        self.gd1.setChecked(False)
+        self.pan2.clear()
+        self.port2.clear()
+        self.ein2.clear()
+        self.dd2.setChecked(False)
+        self.ed2.setChecked(False)
+        self.gd2.setChecked(False)
+        self.pan3.clear()
+        self.port3.clear()
+        self.ein3.clear()
+        self.dd3.setChecked(False)
+        self.ed3.setChecked(False)
+        self.gd3.setChecked(False)
+        self.pan4.clear()
+        self.port4.clear()
+        self.ein4.clear()
+        self.dd4.setChecked(False)
+        self.ed4.setChecked(False)
+        self.gd4.setChecked(False)
+        self.pan5.clear()
+        self.port5.clear()
+        self.ein5.clear()
+        self.dd5.setChecked(False)
+        self.ed5.setChecked(False)
+        self.gd5.setChecked(False)
+        self.pan6.clear()
+        self.port6.clear()
+        self.ein6.clear()
+        self.dd6.setChecked(False)
+        self.ed6.setChecked(False)
+        self.gd6.setChecked(False)
+        self.pan7.clear()
+        self.port7.clear()
+        self.ein7.clear()
+        self.dd7.setChecked(False)
+        self.ed7.setChecked(False)
+        self.gd7.setChecked(False)
+        self.pan8.clear()
+        self.port8.clear()
+        self.ein8.clear()
+        self.dd8.setChecked(False)
+        self.ed8.setChecked(False)
+        self.gd8.setChecked(False)
+        self.pan9.clear()
+        self.port9.clear()
+        self.ein9.clear()
+        self.dd9.setChecked(False)
+        self.ed9.setChecked(False)
+        self.gd9.setChecked(False)
+        self.pan10.clear()
+        self.port10.clear()
+        self.ein10.clear()
+        self.dd10.setChecked(False)
+        self.ed10.setChecked(False)
+        self.gd10.setChecked(False)
+
+    def endVT(self):
+        if self.pan1.text() != "":
+            k = 1
+            if self.dd1.isChecked() == True:
+                while k <= int(self.port1.text()):
+                    string = '%s%i %s %s%i'% (self.pan1.text(), k, self.vt.text(), self.pan1.text(), k+1)
+                    k = k + 2
+                    print (string)
+                    writer.writerow({'A' : string})
+            elif self.ed1.isChecked() == True:
+                while k <= int(self.port1.text()):
+                    string = '%s %s%i'% (self.vt.text(), self.pan1.text(), k)
+                    k = k + 1
+                    print (string)
+                    writer.writerow({'A' : string})
+            elif self.gd1.isChecked() == True:
+                str = self.ein1.text()
+                l = [int(s) for s in str.split(",")]
+                while k < l[0]:
+                    string = '%s%i %s %s%i'% (self.pan1.text(), k, self.vt.text(), self.pan1.text(), k+1)
+                    k = k + 2
+                    print (string)
+                    writer.writerow({'A' : string})
+                string = '%s %s%i'% (self.vt.text(), self.pan1.text(), k)
+                k = k + 1
+                print (string)
+                writer.writerow({'A' : string})
+                i = 0
+                z = len(l)
+                while i < z-1:
+                    while k < l[i+1]:
+                        string = '%s%i %s %s%i'% (self.pan1.text(), k, self.vt.text(), self.pan1.text(), k+1)
+                        k = k + 2
+                        print (string)
+                        writer.writerow({'A' : string})
+                    string = '%s %s%i'% (self.vt.text(), self.pan1.text(), k)
+                    k = k + 1
+                    print (string)
+                    writer.writerow({'A' : string})
+                    i = i + 1
+                if l[i] < int(self.port1.text()) and (int(self.port1.text())-l[i]) % 2 == 0:
+                    while k <= int(self.port1.text()):
+                        string = '%s%i %s %s%i'% (self.pan1.text(), k, self.vt.text(), self.pan1.text(), k+1)
+                        k = k + 2
+                        print (string)
+                        writer.writerow({'A' : string})
+                elif l[i] < int(self.port1.text()) and (int(self.port1.text())-l[i]) % 2 != 0:
+                    while k <= int(self.port1.text())-1:
+                        string = '%s%i %s %s%i'% (self.pan1.text(), k, self.vt.text(), self.pan1.text(), k+1)
+                        k = k + 2
+                        print (string)
+                        writer.writerow({'A' : string})
+                    string = '%s %s%i'% (self.vt.text(), self.pan1.text(), k)
+                    k = k + 1
+                    print (string)
+                    writer.writerow({'A' : string})
+        if self.pan2.text() != "":
+            k = 1
+            if self.dd2.isChecked() == True:
+                while k <= int(self.port2.text()):
+                    string = '%s%i %s %s%i'% (self.pan2.text(), k, self.vt.text(), self.pan2.text(), k+1)
+                    k = k + 2
+                    print (string)
+                    writer.writerow({'A' : string})
+            elif self.ed2.isChecked() == True:
+                while k <= int(self.port2.text()):
+                    string = '%s %s%i'% (self.vt.text(), self.pan2.text(), k)
+                    k = k + 1
+                    print (string)
+                    writer.writerow({'A' : string})
+            elif self.gd2.isChecked() == True:
+                str = self.ein2.text()
+                l = [int(s) for s in str.split(",")]
+                while k < l[0]:
+                    string = '%s%i %s %s%i'% (self.pan2.text(), k, self.vt.text(), self.pan2.text(), k+1)
+                    k = k + 2
+                    print (string)
+                    writer.writerow({'A' : string})
+                string = '%s %s%i'% (self.vt.text(), self.pan2.text(), k)
+                k = k + 1
+                print (string)
+                writer.writerow({'A' : string})
+                i = 0
+                z = len(l)
+                while i < z-1:
+                    while k < l[i+1]:
+                        string = '%s%i %s %s%i'% (self.pan2.text(), k, self.vt.text(), self.pan2.text(), k+1)
+                        k = k + 2
+                        print (string)
+                        writer.writerow({'A' : string})
+                    string = '%s %s%i'% (self.vt.text(), self.pan2.text(), k)
+                    k = k + 1
+                    print (string)
+                    writer.writerow({'A' : string})
+                    i = i + 1
+                if l[i] < int(self.port2.text()) and (int(self.port2.text())-l[i]) % 2 == 0:
+                    while k <= int(self.port2.text()):
+                        string = '%s%i %s %s%i'% (self.pan2.text(), k, self.vt.text(), self.pan2.text(), k+1)
+                        k = k + 2
+                        print (string)
+                        writer.writerow({'A' : string})
+                elif l[i] < int(self.port2.text()) and (int(self.port2.text())-l[i]) % 2 != 0:
+                    while k <= int(self.port2.text())-1:
+                        string = '%s%i %s %s%i'% (self.pan2.text(), k, self.vt.text(), self.pan2.text(), k+1)
+                        k = k + 2
+                        print (string)
+                        writer.writerow({'A' : string})
+                    string = '%s %s%i'% (self.vt.text(), self.pan2.text(), k)
+                    k = k + 1
+                    print (string)
+                    writer.writerow({'A' : string})
+        if self.pan3.text() != "":
+            k = 1
+            if self.dd3.isChecked() == True:
+                while k <= int(self.port3.text()):
+                    string = '%s%i %s %s%i'% (self.pan3.text(), k, self.vt.text(), self.pan3.text(), k+1)
+                    k = k + 2
+                    print (string)
+                    writer.writerow({'A' : string})
+            elif self.ed3.isChecked() == True:
+                while k <= int(self.port3.text()):
+                    string = '%s %s%i'% (self.vt.text(), self.pan3.text(), k)
+                    k = k + 1
+                    print (string)
+                    writer.writerow({'A' : string})
+            elif self.gd3.isChecked() == True:
+                str = self.ein3.text()
+                l = [int(s) for s in str.split(",")]
+                while k < l[0]:
+                    string = '%s%i %s %s%i'% (self.pan3.text(), k, self.vt.text(), self.pan3.text(), k+1)
+                    k = k + 2
+                    print (string)
+                    writer.writerow({'A' : string})
+                string = '%s %s%i'% (self.vt.text(), self.pan3.text(), k)
+                k = k + 1
+                print (string)
+                writer.writerow({'A' : string})
+                i = 0
+                z = len(l)
+                while i < z-1:
+                    while k < l[i+1]:
+                        string = '%s%i %s %s%i'% (self.pan3.text(), k, self.vt.text(), self.pan3.text(), k+1)
+                        k = k + 2
+                        print (string)
+                        writer.writerow({'A' : string})
+                    string = '%s %s%i'% (self.vt.text(), self.pan3.text(), k)
+                    k = k + 1
+                    print (string)
+                    writer.writerow({'A' : string})
+                    i = i + 1
+                if l[i] < int(self.port3.text()) and (int(self.port3.text())-l[i]) % 2 == 0:
+                    while k <= int(self.port3.text()):
+                        string = '%s%i %s %s%i'% (self.pan3.text(), k, self.vt.text(), self.pan3.text(), k+1)
+                        k = k + 2
+                        print (string)
+                        writer.writerow({'A' : string})
+                elif l[i] < int(self.port3.text()) and (int(self.port3.text())-l[i]) % 2 != 0:
+                    while k <= int(self.port3.text())-1:
+                        string = '%s%i %s %s%i'% (self.pan3.text(), k, self.vt.text(), self.pan3.text(), k+1)
+                        k = k + 2
+                        print (string)
+                        writer.writerow({'A' : string})
+                    string = '%s %s%i'% (self.vt.text(), self.pan3.text(), k)
+                    k = k + 1
+                    print (string)
+                    writer.writerow({'A' : string})
+        if self.pan4.text() != "":
+            k = 1
+            if self.dd4.isChecked() == True:
+                while k <= int(self.port4.text()):
+                    string = '%s%i %s %s%i'% (self.pan4.text(), k, self.vt.text(), self.pan4.text(), k+1)
+                    k = k + 2
+                    print (string)
+                    writer.writerow({'A' : string})
+            elif self.ed4.isChecked() == True:
+                while k <= int(self.port4.text()):
+                    string = '%s %s%i'% (self.vt.text(), self.pan4.text(), k)
+                    k = k + 1
+                    print (string)
+                    writer.writerow({'A' : string})
+            elif self.gd4.isChecked() == True:
+                str = self.ein4.text()
+                l = [int(s) for s in str.split(",")]
+                while k < l[0]:
+                    string = '%s%i %s %s%i'% (self.pan4.text(), k, self.vt.text(), self.pan4.text(), k+1)
+                    k = k + 2
+                    print (string)
+                    writer.writerow({'A' : string})
+                string = '%s %s%i'% (self.vt.text(), self.pan4.text(), k)
+                k = k + 1
+                print (string)
+                writer.writerow({'A' : string})
+                i = 0
+                z = len(l)
+                while i < z-1:
+                    while k < l[i+1]:
+                        string = '%s%i %s %s%i'% (self.pan4.text(), k, self.vt.text(), self.pan4.text(), k+1)
+                        k = k + 2
+                        print (string)
+                        writer.writerow({'A' : string})
+                    string = '%s %s%i'% (self.vt.text(), self.pan4.text(), k)
+                    k = k + 1
+                    print (string)
+                    writer.writerow({'A' : string})
+                    i = i + 1
+                if l[i] < int(self.port4.text()) and (int(self.port4.text())-l[i]) % 2 == 0:
+                    while k <= int(self.port4.text()):
+                        string = '%s%i %s %s%i'% (self.pan4.text(), k, self.vt.text(), self.pan4.text(), k+1)
+                        k = k + 2
+                        print (string)
+                        writer.writerow({'A' : string})
+                elif l[i] < int(self.port4.text()) and (int(self.port4.text())-l[i]) % 2 != 0:
+                    while k <= int(self.port4.text())-1:
+                        string = '%s%i %s %s%i'% (self.pan4.text(), k, self.vt.text(), self.pan4.text(), k+1)
+                        k = k + 2
+                        print (string)
+                        writer.writerow({'A' : string})
+                    string = '%s %s%i'% (self.vt.text(), self.pan4.text(), k)
+                    k = k + 1
+                    print (string)
+                    writer.writerow({'A' : string})
+        if self.pan5.text() != "":
+            k = 1
+            if self.dd5.isChecked() == True:
+                while k <= int(self.port5.text()):
+                    string = '%s%i %s %s%i'% (self.pan5.text(), k, self.vt.text(), self.pan5.text(), k+1)
+                    k = k + 2
+                    print (string)
+                    writer.writerow({'A' : string})
+            elif self.ed5.isChecked() == True:
+                while k <= int(self.port5.text()):
+                    string = '%s %s%i'% (self.vt.text(), self.pan5.text(), k)
+                    k = k + 1
+                    print (string)
+                    writer.writerow({'A' : string})
+            elif self.gd5.isChecked() == True:
+                str = self.ein5.text()
+                l = [int(s) for s in str.split(",")]
+                while k < l[0]:
+                    string = '%s%i %s %s%i'% (self.pan5.text(), k, self.vt.text(), self.pan5.text(), k+1)
+                    k = k + 2
+                    print (string)
+                    writer.writerow({'A' : string})
+                string = '%s %s%i'% (self.vt.text(), self.pan5.text(), k)
+                k = k + 1
+                print (string)
+                writer.writerow({'A' : string})
+                i = 0
+                z = len(l)
+                while i < z-1:
+                    while k < l[i+1]:
+                        string = '%s%i %s %s%i'% (self.pan5.text(), k, self.vt.text(), self.pan5.text(), k+1)
+                        k = k + 2
+                        print (string)
+                        writer.writerow({'A' : string})
+                    string = '%s %s%i'% (self.vt.text(), self.pan5.text(), k)
+                    k = k + 1
+                    print (string)
+                    writer.writerow({'A' : string})
+                    i = i + 1
+                if l[i] < int(self.port5.text()) and (int(self.port5.text())-l[i]) % 2 == 0:
+                    while k <= int(self.port5.text()):
+                        string = '%s%i %s %s%i'% (self.pan5.text(), k, self.vt.text(), self.pan5.text(), k+1)
+                        k = k + 2
+                        print (string)
+                        writer.writerow({'A' : string})
+                elif l[i] < int(self.port5.text()) and (int(self.port5.text())-l[i]) % 2 != 0:
+                    while k <= int(self.port5.text())-1:
+                        string = '%s%i %s %s%i'% (self.pan5.text(), k, self.vt.text(), self.pan5.text(), k+1)
+                        k = k + 2
+                        print (string)
+                        writer.writerow({'A' : string})
+                    string = '%s %s%i'% (self.vt.text(), self.pan5.text(), k)
+                    k = k + 1
+                    print (string)
+                    writer.writerow({'A' : string})
+        if self.pan6.text() != "":
+            k = 1
+            if self.dd6.isChecked() == True:
+                while k <= int(self.port6.text()):
+                    string = '%s%i %s %s%i'% (self.pan6.text(), k, self.vt.text(), self.pan6.text(), k+1)
+                    k = k + 2
+                    print (string)
+                    writer.writerow({'A' : string})
+            elif self.ed6.isChecked() == True:
+                while k <= int(self.port6.text()):
+                    string = '%s %s%i'% (self.vt.text(), self.pan6.text(), k)
+                    k = k + 1
+                    print (string)
+                    writer.writerow({'A' : string})
+            elif self.gd6.isChecked() == True:
+                str = self.ein6.text()
+                l = [int(s) for s in str.split(",")]
+                while k < l[0]:
+                    string = '%s%i %s %s%i'% (self.pan6.text(), k, self.vt.text(), self.pan6.text(), k+1)
+                    k = k + 2
+                    print (string)
+                    writer.writerow({'A' : string})
+                string = '%s %s%i'% (self.vt.text(), self.pan6.text(), k)
+                k = k + 1
+                print (string)
+                writer.writerow({'A' : string})
+                i = 0
+                z = len(l)
+                while i < z-1:
+                    while k < l[i+1]:
+                        string = '%s%i %s %s%i'% (self.pan6.text(), k, self.vt.text(), self.pan6.text(), k+1)
+                        k = k + 2
+                        print (string)
+                        writer.writerow({'A' : string})
+                    string = '%s %s%i'% (self.vt.text(), self.pan6.text(), k)
+                    k = k + 1
+                    print (string)
+                    writer.writerow({'A' : string})
+                    i = i + 1
+                if l[i] < int(self.port6.text()) and (int(self.port6.text())-l[i]) % 2 == 0:
+                    while k <= int(self.port6.text()):
+                        string = '%s%i %s %s%i'% (self.pan6.text(), k, self.vt.text(), self.pan6.text(), k+1)
+                        k = k + 2
+                        print (string)
+                        writer.writerow({'A' : string})
+                elif l[i] < int(self.port6.text()) and (int(self.port6.text())-l[i]) % 2 != 0:
+                    while k <= int(self.port6.text())-1:
+                        string = '%s%i %s %s%i'% (self.pan6.text(), k, self.vt.text(), self.pan6.text(), k+1)
+                        k = k + 2
+                        print (string)
+                        writer.writerow({'A' : string})
+                    string = '%s %s%i'% (self.vt.text(), self.pan6.text(), k)
+                    k = k + 1
+                    print (string)
+                    writer.writerow({'A' : string})
+        if self.pan7.text() != "":
+            k = 1
+            if self.dd7.isChecked() == True:
+                while k <= int(self.port7.text()):
+                    string = '%s%i %s %s%i'% (self.pan7.text(), k, self.vt.text(), self.pan7.text(), k+1)
+                    k = k + 2
+                    print (string)
+                    writer.writerow({'A' : string})
+            elif self.ed7.isChecked() == True:
+                while k <= int(self.port7.text()):
+                    string = '%s %s%i'% (self.vt.text(), self.pan7.text(), k)
+                    k = k + 1
+                    print (string)
+                    writer.writerow({'A' : string})
+            elif self.gd7.isChecked() == True:
+                str = self.ein7.text()
+                l = [int(s) for s in str.split(",")]
+                while k < l[0]:
+                    string = '%s%i %s %s%i'% (self.pan7.text(), k, self.vt.text(), self.pan7.text(), k+1)
+                    k = k + 2
+                    print (string)
+                    writer.writerow({'A' : string})
+                string = '%s %s%i'% (self.vt.text(), self.pan7.text(), k)
+                k = k + 1
+                print (string)
+                writer.writerow({'A' : string})
+                i = 0
+                z = len(l)
+                while i < z-1:
+                    while k < l[i+1]:
+                        string = '%s%i %s %s%i'% (self.pan7.text(), k, self.vt.text(), self.pan7.text(), k+1)
+                        k = k + 2
+                        print (string)
+                        writer.writerow({'A' : string})
+                    string = '%s %s%i'% (self.vt.text(), self.pan7.text(), k)
+                    k = k + 1
+                    print (string)
+                    writer.writerow({'A' : string})
+                    i = i + 1
+                if l[i] < int(self.port7.text()) and (int(self.port7.text())-l[i]) % 2 == 0:
+                    while k <= int(self.port7.text()):
+                        string = '%s%i %s %s%i'% (self.pan7.text(), k, self.vt.text(), self.pan7.text(), k+1)
+                        k = k + 2
+                        print (string)
+                        writer.writerow({'A' : string})
+                elif l[i] < int(self.port7.text()) and (int(self.port7.text())-l[i]) % 2 != 0:
+                    while k <= int(self.port7.text())-1:
+                        string = '%s%i %s %s%i'% (self.pan7.text(), k, self.vt.text(), self.pan7.text(), k+1)
+                        k = k + 2
+                        print (string)
+                        writer.writerow({'A' : string})
+                    string = '%s %s%i'% (self.vt.text(), self.pan7.text(), k)
+                    k = k + 1
+                    print (string)
+                    writer.writerow({'A' : string})
+        if self.pan8.text() != "":
+            k = 1
+            if self.dd8.isChecked() == True:
+                while k <= int(self.port8.text()):
+                    string = '%s%i %s %s%i'% (self.pan8.text(), k, self.vt.text(), self.pan8.text(), k+1)
+                    k = k + 2
+                    print (string)
+                    writer.writerow({'A' : string})
+            elif self.ed8.isChecked() == True:
+                while k <= int(self.port8.text()):
+                    string = '%s %s%i'% (self.vt.text(), self.pan8.text(), k)
+                    k = k + 1
+                    print (string)
+                    writer.writerow({'A' : string})
+            elif self.gd8.isChecked() == True:
+                str = self.ein8.text()
+                l = [int(s) for s in str.split(",")]
+                while k < l[0]:
+                    string = '%s%i %s %s%i'% (self.pan8.text(), k, self.vt.text(), self.pan8.text(), k+1)
+                    k = k + 2
+                    print (string)
+                    writer.writerow({'A' : string})
+                string = '%s %s%i'% (self.vt.text(), self.pan8.text(), k)
+                k = k + 1
+                print (string)
+                writer.writerow({'A' : string})
+                i = 0
+                z = len(l)
+                while i < z-1:
+                    while k < l[i+1]:
+                        string = '%s%i %s %s%i'% (self.pan8.text(), k, self.vt.text(), self.pan8.text(), k+1)
+                        k = k + 2
+                        print (string)
+                        writer.writerow({'A' : string})
+                    string = '%s %s%i'% (self.vt.text(), self.pan8.text(), k)
+                    k = k + 1
+                    print (string)
+                    writer.writerow({'A' : string})
+                    i = i + 1
+                if l[i] < int(self.port8.text()) and (int(self.port8.text())-l[i]) % 2 == 0:
+                    while k <= int(self.port8.text()):
+                        string = '%s%i %s %s%i'% (self.pan8.text(), k, self.vt.text(), self.pan8.text(), k+1)
+                        k = k + 2
+                        print (string)
+                        writer.writerow({'A' : string})
+                elif l[i] < int(self.port8.text()) and (int(self.port8.text())-l[i]) % 2 != 0:
+                    while k <= int(self.port8.text())-1:
+                        string = '%s%i %s %s%i'% (self.pan8.text(), k, self.vt.text(), self.pan8.text(), k+1)
+                        k = k + 2
+                        print (string)
+                        writer.writerow({'A' : string})
+                    string = '%s %s%i'% (self.vt.text(), self.pan8.text(), k)
+                    k = k + 1
+                    print (string)
+                    writer.writerow({'A' : string})
+        if self.pan9.text() != "":
+            k = 1
+            if self.dd9.isChecked() == True:
+                while k <= int(self.port9.text()):
+                    string = '%s%i %s %s%i'% (self.pan9.text(), k, self.vt.text(), self.pan9.text(), k+1)
+                    k = k + 2
+                    print (string)
+                    writer.writerow({'A' : string})
+            elif self.ed9.isChecked() == True:
+                while k <= int(self.port9.text()):
+                    string = '%s %s%i'% (self.vt.text(), self.pan9.text(), k)
+                    k = k + 1
+                    print (string)
+                    writer.writerow({'A' : string})
+            elif self.gd9.isChecked() == True:
+                str = self.ein9.text()
+                l = [int(s) for s in str.split(",")]
+                while k < l[0]:
+                    string = '%s%i %s %s%i'% (self.pan9.text(), k, self.vt.text(), self.pan9.text(), k+1)
+                    k = k + 2
+                    print (string)
+                    writer.writerow({'A' : string})
+                string = '%s %s%i'% (self.vt.text(), self.pan9.text(), k)
+                k = k + 1
+                print (string)
+                writer.writerow({'A' : string})
+                i = 0
+                z = len(l)
+                while i < z-1:
+                    while k < l[i+1]:
+                        string = '%s%i %s %s%i'% (self.pan9.text(), k, self.vt.text(), self.pan9.text(), k+1)
+                        k = k + 2
+                        print (string)
+                        writer.writerow({'A' : string})
+                    string = '%s %s%i'% (self.vt.text(), self.pan9.text(), k)
+                    k = k + 1
+                    print (string)
+                    writer.writerow({'A' : string})
+                    i = i + 1
+                if l[i] < int(self.port9.text()) and (int(self.port9.text())-l[i]) % 2 == 0:
+                    while k <= int(self.port9.text()):
+                        string = '%s%i %s %s%i'% (self.pan9.text(), k, self.vt.text(), self.pan9.text(), k+1)
+                        k = k + 2
+                        print (string)
+                        writer.writerow({'A' : string})
+                elif l[i] < int(self.port9.text()) and (int(self.port9.text())-l[i]) % 2 != 0:
+                    while k <= int(self.port9.text())-1:
+                        string = '%s%i %s %s%i'% (self.pan9.text(), k, self.vt.text(), self.pan9.text(), k+1)
+                        k = k + 2
+                        print (string)
+                        writer.writerow({'A' : string})
+                    string = '%s %s%i'% (self.vt.text(), self.pan9.text(), k)
+                    k = k + 1
+                    print (string)
+                    writer.writerow({'A' : string})
+        if self.pan10.text() != "":
+            k = 1
+            if self.dd10.isChecked() == True:
+                while k <= int(self.port10.text()):
+                    string = '%s%i %s %s%i'% (self.pan10.text(), k, self.vt.text(), self.pan10.text(), k+1)
+                    k = k + 2
+                    print (string)
+                    writer.writerow({'A' : string})
+            elif self.ed10.isChecked() == True:
+                while k <= int(self.port10.text()):
+                    string = '%s %s%i'% (self.vt.text(), self.pan10.text(), k)
+                    k = k + 1
+                    print (string)
+                    writer.writerow({'A' : string})
+            elif self.gd10.isChecked() == True:
+                str = self.ein10.text()
+                l = [int(s) for s in str.split(",")]
+                while k < l[0]:
+                    string = '%s%i %s %s%i'% (self.pan10.text(), k, self.vt.text(), self.pan10.text(), k+1)
+                    k = k + 2
+                    print (string)
+                    writer.writerow({'A' : string})
+                string = '%s %s%i'% (self.vt.text(), self.pan10.text(), k)
+                k = k + 1
+                print (string)
+                writer.writerow({'A' : string})
+                i = 0
+                z = len(l)
+                while i < z-1:
+                    while k < l[i+1]:
+                        string = '%s%i %s %s%i'% (self.pan10.text(), k, self.vt.text(), self.pan10.text(), k+1)
+                        k = k + 2
+                        print (string)
+                        writer.writerow({'A' : string})
+                    string = '%s %s%i'% (self.vt.text(), self.pan10.text(), k)
+                    k = k + 1
+                    print (string)
+                    writer.writerow({'A' : string})
+                    i = i + 1
+                if l[i] < int(self.port10.text()) and (int(self.port10.text())-l[i]) % 2 == 0:
+                    while k <= int(self.port10.text()):
+                        string = '%s%i %s %s%i'% (self.pan10.text(), k, self.vt.text(), self.pan10.text(), k+1)
+                        k = k + 2
+                        print (string)
+                        writer.writerow({'A' : string})
+                elif l[i] < int(self.port10.text()) and (int(self.port10.text())-l[i]) % 2 != 0:
+                    while k <= int(self.port10.text())-1:
+                        string = '%s%i %s %s%i'% (self.pan10.text(), k, self.vt.text(), self.pan10.text(), k+1)
+                        k = k + 2
+                        print (string)
+                        writer.writerow({'A' : string})
+                    string = '%s %s%i'% (self.vt.text(), self.pan10.text(), k)
+                    k = k + 1
+                    print (string)
+                    writer.writerow({'A' : string})
+        QApplication.quit()
+
 
 if __name__ == '__main__':
     # Create the Qt Application
