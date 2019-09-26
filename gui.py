@@ -1,144 +1,244 @@
 import csv
 from PyQt5.QtWidgets import *
 from datetime import datetime
+from functools import partial
 import string
 import sys
 
 ts = datetime.fromtimestamp(datetime.now().timestamp()).isoformat()
 
-gcsv = open('Glabel-CSV-%s.csv' %ts, "w+")
+gcsv = open('/home/pointlogic/Desktop/Glabel-CSV-%s.csv' %ts, "w+")
 fnames = ['A']
 writer = csv.DictWriter(gcsv,fieldnames=fnames)
 writer.writeheader
 
 a = string.ascii_uppercase
 
-
-class Form(QMainWindow):
-
+panList = []
+portList = []
+ddList = []
+edList = []
+gdList = []
+einList = []
+class Form(QDialog):
     def __init__(self, parent=None):
-        global x
-        super().__init__(parent)
-        # Create widgets
-        self.SL = QStackedLayout()
-        self.SL.addWidget(self.startLayout())
-        self.SL.setCurrentIndex(0)
-        self.MW = QWidget()
-        self.MW.setLayout(self.SL)
-        self.setCentralWidget(self.MW)
-        
-    def click1(self):
-        self.SL.addWidget(self.panele())
-        self.SL.setCurrentIndex(1)
-        
-    def click2(self):
-        self.SL.addWidget(self.ports())
-        self.SL.setCurrentIndex(2)
-        
-    def click3(self):
-        self.SL.addWidget(self.schleifen())
-        self.SL.setCurrentIndex(3)
-        
-    def click4(self):
-        self.SL.setCurrentIndex(0)
-        
-    def startLayout(self):
-        global ivt
-        Widget = QWidget()
-        layout1 = QVBoxLayout()
-        layout2 = QHBoxLayout()
-        layout1.addLayout(layout2)
-        vtLab = QLabel("Anzahl Verteiler:")
-        self.vt = QLineEdit("4")
-        layout2.addWidget(vtLab)
-        layout2.addWidget(self.vt)
-        self.button1 = QPushButton("Bestätigen1")
-        layout1.addWidget(self.button1)
-        self.button1.clicked.connect(self.click1)
-        ivt = int(self.vt.text())
-        Widget.setLayout(layout1)
-        return Widget
-        
-    def panele(self):
-        global ivt
+        super().__init__()
         global panList
-        panList = [0]
-        i = 1
-        Widget = QWidget()
-        layout1 = QVBoxLayout()
-        layout2 = QHBoxLayout()
-        layout1.addLayout(layout2)
-        pan1lab = QLabel("Anzahl Panele für VT%i:" %i)
-        self.pan1 = QLineEdit("4")
-        self.button2 = QPushButton("Bestätigen2")
-        layout2.addWidget(pan1lab)
-        layout2.addWidget(self.pan1)
-        panList[0] = int(self.pan1.text())
-        while i < ivt:
-            i=i+1
-            layout = QHBoxLayout()
-            pan2lab = QLabel("Anzahl Panele für VT%i:" %i)
-            self.pan2 = QLineEdit("4")
-            layout.addWidget(pan2lab)
-            layout.addWidget(self.pan2)
-            layout1.addLayout(layout)
-            panList.append(int(self.pan2.text()))
-        layout1.addWidget(self.button2)
-        self.button2.clicked.connect(self.click2)
-        Widget.setLayout(layout1)
-        return Widget
+        global portList
+        global ddList
+        global edList
+        global gdList
+        global einList
+        top = QWidget()
+        top.setFixedHeight(50)
+        bottom = QWidget()
+        bottom.setFixedHeight(50)
+        layoutV = QVBoxLayout()
+        layout1 = QHBoxLayout()
+        layout2 = QGridLayout()
+        layout3 = QHBoxLayout()
+        top.setLayout(layout1)
+        bottom.setLayout(layout3)
+        layoutV.addWidget(top)
+        layoutV.addLayout(layout2)
+        layoutV.addWidget(bottom)
+        vtLab = QLabel("Verteiler Name:")
+        self.vt = QLineEdit("")
+        self.vt.setFixedWidth(100)
+        layout1.addWidget(vtLab)
+        layout1.addWidget(self.vt)
+        layout1.addStretch(1)
+        panLab = QLabel("Panelname")
+        portLab = QLabel("Portanzahl")
+        ddLab = QLabel("Doppel- oder")
+        edLab = QLabel("Einzeldosen")
+        gdLab = QLabel("Gemischt")
+        einLab = QLabel("Wenn Gemischt, Einzeldosen eintragen (z.B. 3,6,9...)")
+        layout2.addWidget(panLab,0,1)
+        layout2.addWidget(portLab,0,2)
+        layout2.addWidget(ddLab,0,3)
+        layout2.addWidget(edLab,0,4)
+        layout2.addWidget(gdLab,0,5)
+        layout2.addWidget(einLab,0,6)
+        for x in range(9):
+            panList.append(QLineEdit(""))
+            panList[x].setFixedWidth(50)
+            portList.append(QLineEdit(""))
+            portList[x].setFixedWidth(25)
+            ddList.append(QCheckBox())
+            edList.append(QCheckBox())
+            gdList.append(QCheckBox())
+            einList.append(QLineEdit(""))
+            layout2.addWidget(panList[x],x+1,1)
+            layout2.addWidget(portList[x],x+1,2)
+            layout2.addWidget(ddList[x],x+1,3)
+            layout2.addWidget(edList[x],x+1,4)
+            layout2.addWidget(gdList[x],x+1,5)
+            layout2.addWidget(einList[x],x+1,6)
+            panList[x].textEdited.connect(partial(self.edit_port, x))
+            ddList[x].stateChanged.connect(partial(self.checkstatedd, x))
+            edList[x].stateChanged.connect(partial(self.checkstateed, x))
+            gdList[x].stateChanged.connect(partial(self.checkstategd, x))
+        self.buttonNext = QPushButton("Nächster Verteiler")
+        self.buttonStart = QPushButton("Beenden")
+        layout3.addWidget(self.buttonNext)
+        layout3.addWidget(self.buttonStart)
+        self.setLayout(layoutV)
+        self.buttonNext.clicked.connect(self.nextVT)
+        self.buttonStart.clicked.connect(self.endVT)
 
-    def ports(self):
-        global ivt
-        global panList
-        j = 1
-        i = 0
-        Widget = QWidget()
-        layout = QVBoxLayout()
-        while i < ivt:
-            i=i+1
-            portlab = QLabel("Anzahl der Ports für VT%i Panel %i:" % (i, j))
-            self.ports = QLineEdit("24")
-            dosenlab = QLabel("Handelt es sich bei den Dosen um Doppeldosen (J/n):")
-            self.dosen = QLineEdit("J")
-            layout.addWidget(portlab)
-            layout.addWidget(self.ports)
-            layout.addWidget(dosenlab)
-            layout.addWidget(self.dosen)
-            while j < panList[j]-1:
-                portlab = QLabel("Anzahl der Ports für VT%i Panel %i:" % (i+1, j+1))
-                self.ports = QLineEdit("24")
-                dosenlab = QLabel("Handelt es sich bei den Dosen um Doppeldosen (J/n):")
-                self.dosen = QLineEdit("J")
-                layout.addWidget(portlab)
-                layout.addWidget(self.ports)
-                layout.addWidget(dosenlab)
-                layout.addWidget(self.dosen)
-                j =j +1
-            j = 1
-        self.button3 = QPushButton("Bestätigen3")
-        layout.addWidget(self.button3)
-        self.button3.clicked.connect(self.click3)
-        Widget.setLayout(layout)
-        return Widget
+    def edit_port(self, x):
+        print (x)
+        global portList
+        global ddList
+        global edList
+        global gdList
+        portList[x].setText("24")
+        ddList[x].setChecked(True)
+        edList[x].setChecked(False)
+        gdList[x].setChecked(False)
 
-    def schleifen(self):
-        Widget = QWidget()
-        layout = QVBoxLayout()
-        self.button = QPushButton("Bestätigen4")
-        layout.addWidget(self.button)
-        self.button.clicked.connect(self.click4)
-        Widget.setLayout(layout)
-        return Widget
-#        while k <= self.ports.text():
-#            if self.dosen.text() == 'J':
-#                string = '%s%i VT%i %s%i'% (a[j], k, i, a[j], k+1)
-#                k = k + 2
-#            elif self.dosen.text() == 'n':
-#                string = 'VT%i %s%i'% (i, a[j], k)
-#                k = k + 1
-#            print(string)
-#            writer.writerow({'A' : string})
+    def checkstatedd(self, x):
+        if ddList[x].isChecked() == True:
+            edList[x].setChecked(False)
+            gdList[x].setChecked(False)
+
+    def checkstateed(self, x):
+        if edList[x].isChecked() == True:
+            ddList[x].setChecked(False)
+            gdList[x].setChecked(False)
+
+    def checkstategd(self, x):
+        if gdList[x].isChecked() == True:
+            ddList[x].setChecked(False)
+            edList[x].setChecked(False)
+
+    def nextVT(self):
+        for x in range(9):
+            if panList[0].text() != "":
+                k = 1
+                if ddList[x].isChecked() == True:
+                    while k <= int(portList[x].text()):
+                        string = '%s%i %s %s%i'% (panList[x].text(), k, self.vt.text(), panList[x].text(), k+1)
+                        k = k + 2
+                        print (string)
+                        writer.writerow({'A' : string})
+                elif edList[x].isChecked() == True:
+                    while k <= int(portList[x].text()):
+                        string = '%s %s%i'% (self.vt.text(), panList[x].text(), k)
+                        k = k + 1
+                        print (string)
+                        writer.writerow({'A' : string})
+                elif gdList[x].isChecked() == True:
+                    str = einList[x].text()
+                    l = [int(s) for s in str.split(",")]
+                    while k < l[0]:
+                        string = '%s%i %s %s%i'% (panList[x].text(), k, self.vt.text(), panList[x].text(), k+1)
+                        k = k + 2
+                        print (string)
+                        writer.writerow({'A' : string})
+                    string = '%s %s%i'% (self.vt.text(), panList[x].text(), k)
+                    k = k + 1
+                    print (string)
+                    writer.writerow({'A' : string})
+                    i = 0
+                    z = len(l)
+                    while i < z-1:
+                        while k < l[i+1]:
+                            string = '%s%i %s %s%i'% (panList[x].text(), k, self.vt.text(), panList[x].text(), k+1)
+                            k = k + 2
+                            print (string)
+                            writer.writerow({'A' : string})
+                        string = '%s %s%i'% (self.vt.text(), panList[x].text(), k)
+                        k = k + 1
+                        print (string)
+                        writer.writerow({'A' : string})
+                        i = i + 1
+                    if l[i] < int(portList[x].text()) and (int(portList[x].text())-l[i]) % 2 == 0:
+                        while k <= int(portList[x].text()):
+                            string = '%s%i %s %s%i'% (panList[x].text(), k, self.vt.text(), panList[x].text(), k+1)
+                            k = k + 2
+                            print (string)
+                            writer.writerow({'A' : string})
+                    elif l[i] < int(portList[x].text()) and (int(portList[x].text())-l[i]) % 2 != 0:
+                        while k <= int(portList[x].text())-1:
+                            string = '%s%i %s %s%i'% (panList[x].text(), k, self.vt.text(), panList[x].text(), k+1)
+                            k = k + 2
+                            print (string)
+                            writer.writerow({'A' : string})
+                        string = '%s %s%i'% (self.vt.text(), panList[x].text(), k)
+                        k = k + 1
+                        print (string)
+                        writer.writerow({'A' : string})
+        self.vt.clear()
+        for x in range(9):
+            panList[x].clear()
+            portList[x].clear()
+            einList[x].clear()
+            ddList[x].setChecked(False)
+            edList[x].setChecked(False)
+            gdList[x].setChecked(False)
+
+    def endVT(self):
+        for x in range(9):
+            if panList[0].text() != "":
+                k = 1
+                if ddList[x].isChecked() == True:
+                    while k <= int(portList[x].text()):
+                        string = '%s%i %s %s%i'% (panList[x].text(), k, self.vt.text(), panList[x].text(), k+1)
+                        k = k + 2
+                        print (string)
+                        writer.writerow({'A' : string})
+                elif edList[x].isChecked() == True:
+                    while k <= int(portList[x].text()):
+                        string = '%s %s%i'% (self.vt.text(), panList[x].text(), k)
+                        k = k + 1
+                        print (string)
+                        writer.writerow({'A' : string})
+                elif gdList[x].isChecked() == True:
+                    str = einList[x].text()
+                    l = [int(s) for s in str.split(",")]
+                    while k < l[0]:
+                        string = '%s%i %s %s%i'% (panList[x].text(), k, self.vt.text(), panList[x].text(), k+1)
+                        k = k + 2
+                        print (string)
+                        writer.writerow({'A' : string})
+                    string = '%s %s%i'% (self.vt.text(), panList[x].text(), k)
+                    k = k + 1
+                    print (string)
+                    writer.writerow({'A' : string})
+                    i = 0
+                    z = len(l)
+                    while i < z-1:
+                        while k < l[i+1]:
+                            string = '%s%i %s %s%i'% (panList[x].text(), k, self.vt.text(), panList[x].text(), k+1)
+                            k = k + 2
+                            print (string)
+                            writer.writerow({'A' : string})
+                        string = '%s %s%i'% (self.vt.text(), panList[x].text(), k)
+                        k = k + 1
+                        print (string)
+                        writer.writerow({'A' : string})
+                        i = i + 1
+                    if l[i] < int(portList[x].text()) and (int(portList[x].text())-l[i]) % 2 == 0:
+                        while k <= int(portList[x].text()):
+                            string = '%s%i %s %s%i'% (panList[x].text(), k, self.vt.text(), panList[x].text(), k+1)
+                            k = k + 2
+                            print (string)
+                            writer.writerow({'A' : string})
+                    elif l[i] < int(portList[x].text()) and (int(portList[x].text())-l[i]) % 2 != 0:
+                        while k <= int(portList[x].text())-1:
+                            string = '%s%i %s %s%i'% (panList[x].text(), k, self.vt.text(), panList[x].text(), k+1)
+                            k = k + 2
+                            print (string)
+                            writer.writerow({'A' : string})
+                        string = '%s %s%i'% (self.vt.text(), panList[x].text(), k)
+                        k = k + 1
+                        print (string)
+                        writer.writerow({'A' : string})
+        gcsv.close()
+        QApplication.quit()
+
 
 if __name__ == '__main__':
     # Create the Qt Application
@@ -147,4 +247,4 @@ if __name__ == '__main__':
     form = Form()
     form.show()
     # Run the main Qt loop
-    sys.exit(app.exec_())
+    app.exec_()
